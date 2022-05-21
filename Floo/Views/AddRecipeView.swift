@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct AddRecipeView: View {
+    @State private var givenName: String = ""
+    @State private var familyName: String = ""
+    
+    init() {
+            UITableView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("Username").bold()
+                    Divider()
+                    TextField("Username", text: $givenName)
+                }
+                HStack {
+                    Text("Username").bold()
+                    Divider()
+                    TextField("Username", text: $givenName)
+                }
+                .background(.white)
+            }
+            .navigationTitle("Navigation")
+        }
+        
     }
 }
 

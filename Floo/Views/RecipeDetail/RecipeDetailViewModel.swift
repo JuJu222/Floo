@@ -1,18 +1,18 @@
 //
-//  ExploreViewModel.swift
+//  RecipeDetailViewModel.swift
 //  Floo
 //
-//  Created by MacBook Pro on 14/05/2022.
+//  Created by MacBook Pro on 15/05/2022.
 //
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class RecipeDetailViewModel: ObservableObject {
     
-    @Published var results: [Recipe] = []
+    @Published var results: RecipeDetail = RecipeDetail()
     
-    func loadData() {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/random?apiKey=958bd58dc3c24ef297f7e473436430c0") else { fatalError("Missing URL") }
+    func loadData(id: Int) {
+        guard let url = URL(string: "https://api.spoonacular.com/recipes/\(id)/information?apiKey=958bd58dc3c24ef297f7e473436430c0") else { fatalError("Missing URL") }
 
             let urlRequest = URLRequest(url: url)
 
@@ -28,8 +28,8 @@ class ViewModel: ObservableObject {
                     guard let data = data else { return }
                     DispatchQueue.main.async {
                         do {
-                            let decodedUsers = try JSONDecoder().decode(RecipeAll.self, from: data)
-                            self.results = decodedUsers.recipes
+                            let decodedUsers = try JSONDecoder().decode(RecipeDetail.self, from: data)
+                            self.results = decodedUsers
                         } catch let error {
                             print("Error decoding: ", error)
                         }

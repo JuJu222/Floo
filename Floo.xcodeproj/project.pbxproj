@@ -18,6 +18,12 @@
 		040E003328280C1900524A57 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003228280C1900524A57 /* AddRecipeView.swift */; };
 		040E0038282E915200524A57 /* RecipeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0037282E915200524A57 /* RecipeAll.swift */; };
 		040E003A282FB3E500524A57 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0039282FB3E500524A57 /* ExploreViewModel.swift */; };
+		040E003E2831681700524A57 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003D2831681700524A57 /* RecipeDetailViewModel.swift */; };
+		040E00402831688A00524A57 /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003F2831688A00524A57 /* RecipeDetail.swift */; };
+		040E0042283517D200524A57 /* ExploreMenuCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0041283517D200524A57 /* ExploreMenuCard.swift */; };
+		040E004528367D3400524A57 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E004428367D3400524A57 /* RoundedCorner.swift */; };
+		040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0047283688C100524A57 /* MyRecipesCard.swift */; };
+		040E004A28368ABB00524A57 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E004928368ABB00524A57 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,12 @@
 		040E003228280C1900524A57 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		040E0037282E915200524A57 /* RecipeAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAll.swift; sourceTree = "<group>"; };
 		040E0039282FB3E500524A57 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		040E003D2831681700524A57 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		040E003F2831688A00524A57 /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
+		040E0041283517D200524A57 /* ExploreMenuCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreMenuCard.swift; sourceTree = "<group>"; };
+		040E004428367D3400524A57 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		040E0047283688C100524A57 /* MyRecipesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesCard.swift; sourceTree = "<group>"; };
+		040E004928368ABB00524A57 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +77,10 @@
 		040E001A2827E8F600524A57 /* Floo */ = {
 			isa = PBXGroup;
 			children = (
+				040E004328367CF000524A57 /* Helper */,
 				040E0036282E914400524A57 /* Model */,
 				040E002B2827F39900524A57 /* Views */,
 				040E001B2827E8F600524A57 /* FlooApp.swift */,
-				040E0039282FB3E500524A57 /* ExploreViewModel.swift */,
 				040E001D2827E8F600524A57 /* ContentView.swift */,
 				040E001F2827E8F800524A57 /* Assets.xcassets */,
 				040E00212827E8F800524A57 /* Preview Content */,
@@ -87,9 +99,9 @@
 		040E002B2827F39900524A57 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				040E00292827F39400524A57 /* ExploreView.swift */,
-				040E002C2827F9AE00524A57 /* RecipeDetailView.swift */,
-				040E002E282806BE00524A57 /* MyRecipesView.swift */,
+				040E0046283687D400524A57 /* MyRecipes */,
+				040E003C283167FF00524A57 /* RecipeDetail */,
+				040E003B2831676700524A57 /* Explore */,
 				040E003028280C0700524A57 /* ProfileView.swift */,
 				040E003228280C1900524A57 /* AddRecipeView.swift */,
 			);
@@ -100,8 +112,46 @@
 			isa = PBXGroup;
 			children = (
 				040E0037282E915200524A57 /* RecipeAll.swift */,
+				040E003F2831688A00524A57 /* RecipeDetail.swift */,
+				040E004928368ABB00524A57 /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		040E003B2831676700524A57 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				040E00292827F39400524A57 /* ExploreView.swift */,
+				040E0039282FB3E500524A57 /* ExploreViewModel.swift */,
+				040E0041283517D200524A57 /* ExploreMenuCard.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		040E003C283167FF00524A57 /* RecipeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				040E002C2827F9AE00524A57 /* RecipeDetailView.swift */,
+				040E003D2831681700524A57 /* RecipeDetailViewModel.swift */,
+			);
+			path = RecipeDetail;
+			sourceTree = "<group>";
+		};
+		040E004328367CF000524A57 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				040E004428367D3400524A57 /* RoundedCorner.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		040E0046283687D400524A57 /* MyRecipes */ = {
+			isa = PBXGroup;
+			children = (
+				040E002E282806BE00524A57 /* MyRecipesView.swift */,
+				040E0047283688C100524A57 /* MyRecipesCard.swift */,
+			);
+			path = MyRecipes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,8 +227,14 @@
 				040E003328280C1900524A57 /* AddRecipeView.swift in Sources */,
 				040E001E2827E8F600524A57 /* ContentView.swift in Sources */,
 				040E002A2827F39400524A57 /* ExploreView.swift in Sources */,
+				040E003E2831681700524A57 /* RecipeDetailViewModel.swift in Sources */,
+				040E004528367D3400524A57 /* RoundedCorner.swift in Sources */,
+				040E0042283517D200524A57 /* ExploreMenuCard.swift in Sources */,
 				040E0038282E915200524A57 /* RecipeAll.swift in Sources */,
+				040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */,
+				040E004A28368ABB00524A57 /* User.swift in Sources */,
 				040E001C2827E8F600524A57 /* FlooApp.swift in Sources */,
+				040E00402831688A00524A57 /* RecipeDetail.swift in Sources */,
 				040E002F282806BE00524A57 /* MyRecipesView.swift in Sources */,
 				040E003A282FB3E500524A57 /* ExploreViewModel.swift in Sources */,
 				040E003128280C0700524A57 /* ProfileView.swift in Sources */,
