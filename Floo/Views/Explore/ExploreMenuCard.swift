@@ -13,12 +13,16 @@ struct ExploreMenuCard: View {
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: recipe.image ?? "")) { image in
-                image.resizable()
+                image
+                    .resizable()
+                    .scaledToFill()
             } placeholder: {
 //                ProgressView()
                 Image("turtlerock")
+                    .resizable()
+                    .scaledToFill()
             }
-            .frame(width: 100, height: 100)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
             .cornerRadius(20)
             .shadow(radius: 7)
                 

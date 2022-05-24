@@ -12,66 +12,131 @@ struct RecipeDetailView: View {
     var id: Int
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Image("turtlerock")
-                .resizable()
-                .aspectRatio(3 / 2, contentMode: .fit)
-                .ignoresSafeArea()
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text(viewModel.results.title ?? "Hi")
-                    .font(.system(size: 19))
+        ScrollView {
+            VStack(alignment: .leading) {
+                AsyncImage(url: URL(string: viewModel.results.image ?? "")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(3 / 2, contentMode: .fit)
+                        .ignoresSafeArea()
+                } placeholder: {
+    //                ProgressView()
+                    Image("turtlerock")
+                        .resizable()
+                        .aspectRatio(3 / 2, contentMode: .fit)
+                        .ignoresSafeArea()
+                }
                 
-                Text("Joshua Tree National Park")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(viewModel.results.title ?? "Title")
+                        .font(.title2)
+                        .bold()
+                    
+                    Text(viewModel.results.summary ?? "Description")
+                        .font(.subheadline)
 
-                Text("Nutritions")
-                    .font(.title2)
-                
-                VStack {
-                    HStack {
+                    Text("Nutritions")
+                        .font(.title2)
+                        .bold()
+                    
+                    VStack {
                         HStack {
-                            Text("200")
-                            VStack {
-                                Text("Calories")
-                                Text("Gram")
+                            HStack {
+                                Text("200")
+                                    .font(.title2)
+                                    .bold()
+                                
+                                VStack {
+                                    Text("Calories")
+                                    Text("Gram")
+                                }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.secondary)
+                            .cornerRadius(16)
+                            
+                            HStack {
+                                Text("200")
+                                    .font(.title2)
+                                    .bold()
+                                
+                                VStack {
+                                    Text("Carbo")
+                                    Text("Gram")
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.secondary)
+                            .cornerRadius(16)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(.secondary)
-                        .cornerRadius(16)
-                        
+                    }
+                    
+                    VStack {
                         HStack {
-                            Text("200")
-                            VStack {
-                                Text("Carbo")
-                                Text("Gram")
+                            HStack {
+                                Text("200")
+                                    .font(.title2)
+                                    .bold()
+                                
+                                VStack {
+                                    Text("Calories")
+                                    Text("Gram")
+                                }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.secondary)
+                            .cornerRadius(16)
+                            
+                            HStack {
+                                Text("200")
+                                    .font(.title2)
+                                    .bold()
+                                
+                                VStack {
+                                    Text("Carbo")
+                                    Text("Gram")
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.secondary)
+                            .cornerRadius(16)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(.secondary)
-                        .cornerRadius(16)
+                    }
+                    
+                    Text("Ingredients")
+                        .font(.title2)
+                        .bold()
+                    
+                    VStack(alignment: .leading) {
+                        ForEach(viewModel.results.extendedIngredients ?? [ExtendedIngredient](), id: \.self) { ingredient in
+                            Text(ingredient.name ?? "Ingredient")
+                                .padding()
+                        }
+                    }
+                    
+                    Text("Steps")
+                        .font(.title2)
+                        .bold()
+                    
+                    VStack(alignment: .leading) {
+                        ForEach(viewModel.results.analyzedInstructions?[0].steps ?? [Step](), id: \.self) { step in
+                            Text(step.step ?? "Step")
+                                .padding()
+                        }
                     }
                 }
+                .padding()
                 
-                Text("Ingredients")
-                    .font(.title2)
-                
-                VStack(alignment: .leading) {
-                    Text("A List Item")
-                    Text("A Second List Item")
-                    Text("A Third List Item")
-                }
+                Spacer()
             }
-            .padding()
-            
-            Spacer()
-        }
-        .onAppear {
-            viewModel.loadData(id: self.id)
+            .onAppear {
+                viewModel.loadData(id: self.id)
+                print(self.id)
+            }
         }
     }
 }

@@ -23,6 +23,14 @@ struct MyRecipesView: View {
                     Text("A Third List Item")
                 }
                 
+                
+                NavigationLink {
+                    AddRecipeView()
+                } label: {
+                    Text("Add Recipe")
+                }
+                .buttonStyle(.bordered)
+                
                 Spacer()
             }
             .frame(

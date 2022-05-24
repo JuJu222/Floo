@@ -11,7 +11,7 @@ class ExploreViewModel: ObservableObject {
     @Published var results: [RecipeDetail] = []
     
     func loadData() {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/random?apiKey=958bd58dc3c24ef297f7e473436430c0&number=10") else { fatalError("Missing URL") }
+        guard let url = URL(string: "https://api.spoonacular.com/recipes/random?apiKey=\(ApiKey.apiKeys[1])&number=10") else { fatalError("Missing URL") }
 
             let urlRequest = URLRequest(url: url)
 

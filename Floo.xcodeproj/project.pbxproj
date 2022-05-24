@@ -24,6 +24,8 @@
 		040E004528367D3400524A57 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E004428367D3400524A57 /* RoundedCorner.swift */; };
 		040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0047283688C100524A57 /* MyRecipesCard.swift */; };
 		040E004A28368ABB00524A57 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E004928368ABB00524A57 /* User.swift */; };
+		040E004C283A364900524A57 /* HTMLStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E004B283A364900524A57 /* HTMLStringView.swift */; };
+		04C6894A283A40DE00414F95 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C68949283A40DE00414F95 /* ApiKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		040E004428367D3400524A57 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		040E0047283688C100524A57 /* MyRecipesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesCard.swift; sourceTree = "<group>"; };
 		040E004928368ABB00524A57 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		040E004B283A364900524A57 /* HTMLStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLStringView.swift; sourceTree = "<group>"; };
+		04C68949283A40DE00414F95 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				040E004428367D3400524A57 /* RoundedCorner.swift */,
+				040E004B283A364900524A57 /* HTMLStringView.swift */,
+				04C68949283A40DE00414F95 /* ApiKey.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -225,11 +231,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				040E003328280C1900524A57 /* AddRecipeView.swift in Sources */,
+				04C6894A283A40DE00414F95 /* ApiKey.swift in Sources */,
 				040E001E2827E8F600524A57 /* ContentView.swift in Sources */,
 				040E002A2827F39400524A57 /* ExploreView.swift in Sources */,
 				040E003E2831681700524A57 /* RecipeDetailViewModel.swift in Sources */,
 				040E004528367D3400524A57 /* RoundedCorner.swift in Sources */,
 				040E0042283517D200524A57 /* ExploreMenuCard.swift in Sources */,
+				040E004C283A364900524A57 /* HTMLStringView.swift in Sources */,
 				040E0038282E915200524A57 /* RecipeAll.swift in Sources */,
 				040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */,
 				040E004A28368ABB00524A57 /* User.swift in Sources */,

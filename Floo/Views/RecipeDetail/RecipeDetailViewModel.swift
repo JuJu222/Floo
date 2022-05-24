@@ -12,7 +12,7 @@ class RecipeDetailViewModel: ObservableObject {
     @Published var results: RecipeDetail = RecipeDetail()
     
     func loadData(id: Int) {
-        guard let url = URL(string: "https://api.spoonacular.com/recipes/\(id)/information?apiKey=958bd58dc3c24ef297f7e473436430c0") else { fatalError("Missing URL") }
+        guard let url = URL(string: "https://api.spoonacular.com/recipes/\(id)/information?apiKey=\(ApiKey.apiKeys[1])") else { fatalError("Missing URL") }
 
             let urlRequest = URLRequest(url: url)
 
@@ -30,6 +30,7 @@ class RecipeDetailViewModel: ObservableObject {
                         do {
                             let decodedUsers = try JSONDecoder().decode(RecipeDetail.self, from: data)
                             self.results = decodedUsers
+                            self.results.summary = self.results.summary!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
                         } catch let error {
                             print("Error decoding: ", error)
                         }

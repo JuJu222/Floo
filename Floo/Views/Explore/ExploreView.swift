@@ -25,7 +25,7 @@ struct ExploreView: View {
                 }
             }
             .navigationTitle("Explore Recipes")
-            .onAppear{
+            .onAppear {
                 viewModel.loadData()
             }
         }

@@ -15,34 +15,39 @@ struct RecipeDetail: Codable, Hashable {
         hasher.combine(id)
     }
     
-    let vegetarian, vegan, glutenFree, dairyFree: Bool?
-    let veryHealthy, cheap, veryPopular, sustainable: Bool?
-    let weightWatcherSmartPoints: Int?
-    let gaps: String?
-    let lowFodmap: Bool?
-    let aggregateLikes, spoonacularScore, healthScore: Int?
-    let creditsText, sourceName: String?
-    let pricePerServing: Double?
-    let extendedIngredients: [ExtendedIngredient]?
-    let id: Int?
-    let title: String?
-    let readyInMinutes, servings: Int?
-    let sourceURL: String?
-    let image: String?
-    let imageType, summary: String?
-    let cuisines: [JSONAny]?
-    let dishTypes, diets: [String]?
-    let occasions: [JSONAny]?
-    let winePairing: WinePairing?
-    let instructions: String?
-    let analyzedInstructions: [AnalyzedInstruction]?
-    let originalID: JSONNull?
+    var vegetarian, vegan, glutenFree, dairyFree: Bool?
+    var veryHealthy, cheap, veryPopular, sustainable: Bool?
+    var lowFodmap: Bool?
+    var weightWatcherSmartPoints: Int?
+    var gaps: String?
+    var preparationMinutes, cookingMinutes, aggregateLikes, healthScore: Int?
+    var creditsText, license, sourceName: String?
+    var pricePerServing: Double?
+    var extendedIngredients: [ExtendedIngredient]?
+    var id: Int?
+    var title: String?
+    var readyInMinutes, servings: Int?
+    var sourceURL: String?
+    var openLicense: Int?
+    var image: String?
+    var imageType: String?
+    var nutrition: Nutrition?
+    var summary: String?
+    var cuisines, dishTypes: [JSONAny]?
+    var diets: [String]?
+    var occasions: [JSONAny]?
+    var winePairing: WinePairing?
+    var instructions: String?
+    var analyzedInstructions: [AnalyzedInstruction]?
+    var originalID: JSONNull?
+    var spoonacularSourceURL: String?
 
     enum CodingKeys: String, CodingKey {
-        case vegetarian, vegan, glutenFree, dairyFree, veryHealthy, cheap, veryPopular, sustainable, weightWatcherSmartPoints, gaps, lowFodmap, aggregateLikes, spoonacularScore, healthScore, creditsText, sourceName, pricePerServing, extendedIngredients, id, title, readyInMinutes, servings
+        case vegetarian, vegan, glutenFree, dairyFree, veryHealthy, cheap, veryPopular, sustainable, lowFodmap, weightWatcherSmartPoints, gaps, preparationMinutes, cookingMinutes, aggregateLikes, healthScore, creditsText, license, sourceName, pricePerServing, extendedIngredients, id, title, readyInMinutes, servings
         case sourceURL = "sourceUrl"
-        case image, imageType, summary, cuisines, dishTypes, diets, occasions, winePairing, instructions, analyzedInstructions
+        case openLicense, image, imageType, nutrition, summary, cuisines, dishTypes, diets, occasions, winePairing, instructions, analyzedInstructions
         case originalID = "originalId"
+        case spoonacularSourceURL = "spoonacularSourceUrl"
     }
     
     internal init() {
@@ -58,7 +63,6 @@ struct RecipeDetail: Codable, Hashable {
         self.gaps = nil
         self.lowFodmap = nil
         self.aggregateLikes = nil
-        self.spoonacularScore = nil
         self.healthScore = nil
         self.creditsText = nil
         self.sourceName = nil
@@ -85,47 +89,137 @@ struct RecipeDetail: Codable, Hashable {
 
 // MARK: - AnalyzedInstruction
 struct AnalyzedInstruction: Codable {
-    let name: String?
-    let steps: [Step]?
+    var name: String?
+    var steps: [Step]?
 }
 
 // MARK: - Step
-struct Step: Codable {
-    let number: Int?
-    let step: String?
-    let ingredients, equipment: [Ent]?
+struct Step: Codable, Hashable {
+    static func == (lhs: Step, rhs: Step) -> Bool {
+        lhs.number == rhs.number
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(number)
+    }
+    
+    var number: Int?
+    var step: String?
+    var ingredients: [StepIngredient]?
+    var equipment: [JSONAny]?
 }
 
-// MARK: - Ent
-struct Ent: Codable {
-    let id: Int?
-    let name, localizedName, image: String?
+// MARK: - StepIngredient
+struct StepIngredient: Codable {
+    var id: Int?
+    var name, localizedName, image: String?
 }
 
 // MARK: - ExtendedIngredient
-struct ExtendedIngredient: Codable {
-    let id: Int?
-    let aisle, image, consistency, name: String?
-    let nameClean, original, originalName: String?
-    let amount: Double?
-    let unit: String?
-    let meta: [String]?
-    let measures: Measures?
+struct ExtendedIngredient: Codable, Hashable {
+    static func == (lhs: ExtendedIngredient, rhs: ExtendedIngredient) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    var id: Int?
+    var aisle, image: String?
+    var consistency: Consistency?
+    var name, nameClean, original, originalName: String?
+    var amount: Double?
+    var unit: String?
+    var meta: [String]?
+    var measures: Measures?
+}
+
+enum Consistency: String, Codable {
+    case liquid = "LIQUID"
+    case solid = "SOLID"
 }
 
 // MARK: - Measures
 struct Measures: Codable {
-    let us, metric: Metric?
+    var us, metric: Metric?
 }
 
 // MARK: - Metric
 struct Metric: Codable {
-    let amount: Double?
-    let unitShort, unitLong: String?
+    var amount: Double?
+    var unitShort, unitLong: String?
+}
+
+// MARK: - Nutrition
+struct Nutrition: Codable {
+    var nutrients, properties, flavonoids: [Flavonoid]?
+    var ingredients: [NutritionIngredient]?
+    var caloricBreakdown: CaloricBreakdown?
+    var weightPerServing: WeightPerServing?
+}
+
+// MARK: - CaloricBreakdown
+struct CaloricBreakdown: Codable {
+    var percentProtein, percentFat, percentCarbs: Double?
+}
+
+// MARK: - Flavonoid
+struct Flavonoid: Codable {
+    var name: String?
+    var amount: Double?
+    var unit: Unit?
+    var percentOfDailyNeeds: Double?
+}
+
+enum Unit: String, Codable {
+    case empty = ""
+    case g = "g"
+    case iu = "IU"
+    case kcal = "kcal"
+    case mg = "mg"
+    case µg = "µg"
+}
+
+// MARK: - NutritionIngredient
+struct NutritionIngredient: Codable {
+    var id: Int?
+    var name: String?
+    var amount: Double?
+    var unit: String?
+    var nutrients: [Flavonoid]?
+}
+
+// MARK: - WeightPerServing
+struct WeightPerServing: Codable {
+    var amount: Int?
+    var unit: Unit?
 }
 
 // MARK: - WinePairing
 struct WinePairing: Codable {
+    var pairedWines: [String]?
+    var pairingText: String?
+    var productMatches: [ProductMatch]?
+}
+
+// MARK: - ProductMatch
+struct ProductMatch: Codable {
+    var id: Int?
+    var title, productMatchDescription, price: String?
+    var imageURL: String?
+    var averageRating: Double?
+    var ratingCount: Int?
+    var score: Double?
+    var link: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case productMatchDescription = "description"
+        case price
+        case imageURL = "imageUrl"
+        case averageRating, ratingCount, score, link
+    }
 }
 
 // MARK: - Encode/decode helpers
