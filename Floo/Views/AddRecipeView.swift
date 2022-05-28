@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AddRecipeView: View {
-    @State private var givenName: String = ""
-    @State private var familyName: String = ""
+    @State private var name: String = ""
+    @State private var description: String = ""
     
     init() {
             UITableView.appearance().backgroundColor = .clear
@@ -18,23 +18,19 @@ struct AddRecipeView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("PROFILE")) {
-                    HStack {
-                        Text("Username").bold()
-                        Divider()
-                        TextField("Username", text: $givenName)
-                    }
-                    
-                    HStack {
-                        Text("Username").bold()
-                        Divider()
-                        TextField("Username", text: $givenName)
-                    }
+                Section(header: Text("General")) {
+                    TextField("Name", text: $name)
+                    TextField("Description", text: $description)
+                }
+                
+                Section(header: Text("Nutritions")) {
+                    TextField("Calories", text: $name)
+                    TextField("Description", text: $description)
                 }
                 
                 Button {
                     var recipe = RecipeDetail()
-                    recipe.title = givenName
+                    recipe.title = name
                     submitForm(recipe: recipe)
                 } label: {
                     Text("Submit")
@@ -43,15 +39,10 @@ struct AddRecipeView: View {
             }
             .navigationTitle("Navigation")
         }
-        
-        
-        
     }
     
     func submitForm(recipe: RecipeDetail) {
         var recipes = [RecipeDetail]()
-        
-        UserDefaults.standard.removeObject(forKey: "recipes")
         
         if let data = UserDefaults.standard.data(forKey: "recipes") {
             do {
@@ -66,6 +57,8 @@ struct AddRecipeView: View {
                 print("Unable to Decode Notes (\(error))")
             }
         }
+        
+        recipes.append(recipe)
 
         do {
             // Create JSON Encoder

@@ -20,7 +20,7 @@ struct MyRecipesCard: View {
             }
             .frame(width: 120, height: 180)
             .overlay {
-                TextOverlay()
+                TextOverlay(recipe: recipe)
             }
             .cornerRadius(20)
             .shadow(radius: 7)
@@ -31,6 +31,8 @@ struct MyRecipesCard: View {
 }
 
 struct TextOverlay: View {
+    var recipe: RecipeDetail
+    
     var gradient: LinearGradient {
         .linearGradient(
             Gradient(colors: [.black.opacity(0.6), .black.opacity(0)]),
@@ -42,7 +44,7 @@ struct TextOverlay: View {
         ZStack {
             gradient
             VStack {
-                Text("aaa")
+                Text(recipe.title ?? "")
                     .font(.title)
                     .bold()
                 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0404482F283FD973008612C2 /* MyRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404482E283FD973008612C2 /* MyRecipesViewModel.swift */; };
 		040E001C2827E8F600524A57 /* FlooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E001B2827E8F600524A57 /* FlooApp.swift */; };
 		040E001E2827E8F600524A57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E001D2827E8F600524A57 /* ContentView.swift */; };
 		040E00202827E8F800524A57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040E001F2827E8F800524A57 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0404482E283FD973008612C2 /* MyRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewModel.swift; sourceTree = "<group>"; };
 		040E00182827E8F600524A57 /* Floo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Floo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		040E001B2827E8F600524A57 /* FlooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlooApp.swift; sourceTree = "<group>"; };
 		040E001D2827E8F600524A57 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				040E002E282806BE00524A57 /* MyRecipesView.swift */,
 				040E0047283688C100524A57 /* MyRecipesCard.swift */,
+				0404482E283FD973008612C2 /* MyRecipesViewModel.swift */,
 			);
 			path = MyRecipes;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				040E004528367D3400524A57 /* RoundedCorner.swift in Sources */,
 				040E0042283517D200524A57 /* ExploreMenuCard.swift in Sources */,
 				040E004C283A364900524A57 /* HTMLStringView.swift in Sources */,
+				0404482F283FD973008612C2 /* MyRecipesViewModel.swift in Sources */,
 				040E0038282E915200524A57 /* RecipeAll.swift in Sources */,
 				040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */,
 				040E004A28368ABB00524A57 /* User.swift in Sources */,

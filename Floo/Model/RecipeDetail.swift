@@ -49,42 +49,6 @@ struct RecipeDetail: Codable, Hashable {
         case originalID = "originalId"
         case spoonacularSourceURL = "spoonacularSourceUrl"
     }
-    
-    internal init() {
-        self.vegetarian = nil
-        self.vegan = nil
-        self.glutenFree = nil
-        self.dairyFree = nil
-        self.veryHealthy = nil
-        self.cheap = nil
-        self.veryPopular = nil
-        self.sustainable = nil
-        self.weightWatcherSmartPoints = nil
-        self.gaps = nil
-        self.lowFodmap = nil
-        self.aggregateLikes = nil
-        self.healthScore = nil
-        self.creditsText = nil
-        self.sourceName = nil
-        self.pricePerServing = nil
-        self.extendedIngredients = nil
-        self.id = nil
-        self.title = nil
-        self.readyInMinutes = nil
-        self.servings = nil
-        self.sourceURL = nil
-        self.image = nil
-        self.imageType = nil
-        self.summary = nil
-        self.cuisines = nil
-        self.dishTypes = nil
-        self.diets = nil
-        self.occasions = nil
-        self.winePairing = nil
-        self.instructions = nil
-        self.analyzedInstructions = nil
-        self.originalID = nil
-    }
 }
 
 // MARK: - AnalyzedInstruction

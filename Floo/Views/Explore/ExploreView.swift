@@ -13,7 +13,7 @@ struct ExploreView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical) {
+            ScrollView {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.results, id: \.self) { recipe in
                         NavigationLink {
