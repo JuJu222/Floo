@@ -28,7 +28,7 @@ struct MyRecipesCard: View {
             .cornerRadius(20)
             .shadow(radius: 7)
                 
-            Text(recipe.title ?? "")
+            recipe.cuisines?.reduce(Text(""), { $0 + Text($1) + Text(" ")} )
         }
     }
 }
@@ -48,7 +48,7 @@ struct MyRecipesCardSavedRecipes: View {
                 .cornerRadius(20)
                 .shadow(radius: 7)
                 
-            Text(recipe.title ?? "")
+            recipe.cuisines?.reduce(Text(""), { $0 + Text($1) + Text(", ")} )
         }
     }
 }
@@ -67,7 +67,7 @@ struct TextOverlay: View {
         ZStack {
             gradient
             Text(recipe.title ?? "Title")
-                .font(.title)
+                .font(.title2)
                 .bold()
         }
         .foregroundColor(.white)

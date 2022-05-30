@@ -50,7 +50,11 @@ struct MyRecipesView: View {
                     NavigationLink {
                         AddRecipeView()
                     } label: {
-                        Text("Add Recipe")
+                        HStack {
+                            Spacer()
+                            Text("Add Recipe")
+                            Spacer()
+                        }
                     }
                     .buttonStyle(.bordered)
                     

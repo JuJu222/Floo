@@ -15,6 +15,7 @@ struct AddRecipeView: View {
     @State private var carbs: String = ""
     @State private var protein: String = ""
     @State private var calcium: String = ""
+    @State var cuisines: [String] = [""]
     @State var ingredientsName: [String] = [""]
     @State var ingredientsAmount: [String] = [""]
     @State var ingredientsUnit: [String] = [""]
@@ -37,6 +38,18 @@ struct AddRecipeView: View {
                     TextField("Carbohydrates", text: $carbs)
                     TextField("Protein", text: $protein)
                     TextField("Calcium", text: $calcium)
+                }.foregroundColor(.black)
+                
+                Section(header: Text("Cuisines")) {
+                    ForEach(0..<cuisines.count, id: \.self) { index in
+                        TextField("Cuisine \(index + 1)", text: self.$cuisines[index])
+                    }
+
+                    Button {
+                        self.steps.append("")
+                    } label: {
+                        Text("Add More Cuisines")
+                    }
                 }.foregroundColor(.black)
                 
                 Section(header: Text("Ingredients")) {
@@ -78,12 +91,16 @@ struct AddRecipeView: View {
                     recipe.extendedIngredients = [ExtendedIngredient]()
                     recipe.analyzedInstructions = [AnalyzedInstruction](repeating: AnalyzedInstruction(), count: 1)
                     recipe.analyzedInstructions?[0].steps = [Step]()
+                    recipe.cuisines = [String]()
                     recipe.title = name
                     recipe.summary = description
                     recipe.nutrition?.nutrients?[0].amount = Double(calories)
                     recipe.nutrition?.nutrients?[3].amount = Double(carbs)
                     recipe.nutrition?.nutrients?[8].amount = Double(protein)
                     recipe.nutrition?.nutrients?[21].amount = Double(calcium)
+                    for cuisine in cuisines {
+                        recipe.cuisines?.append(cuisine)
+                    }
                     for (index, ingredient) in ingredientsName.enumerated() {
                         var temp = ExtendedIngredient()
                         temp.name = ingredient

@@ -33,7 +33,7 @@ struct RecipeDetail: Codable, Hashable {
     var imageType: String?
     var nutrition: Nutrition?
     var summary: String?
-    var cuisines, dishTypes: [JSONAny]?
+    var cuisines, dishTypes: [String]?
     var diets: [String]?
     var occasions: [JSONAny]?
     var winePairing: WinePairing?
