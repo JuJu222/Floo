@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExploreView: View {
     @StateObject var viewModel = ExploreViewModel()
+    @State private var searchText = ""
     private var columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -21,9 +22,12 @@ struct ExploreView: View {
                         } label: {
                             ExploreMenuCard(recipe: recipe)
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
+            .padding()
+            .searchable(text: $searchText)
             .navigationTitle("Explore Recipes")
             .onAppear {
                 viewModel.loadData()

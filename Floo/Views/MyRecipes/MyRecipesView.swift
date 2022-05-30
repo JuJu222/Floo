@@ -16,14 +16,14 @@ struct MyRecipesView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
                     VStack(alignment: .leading) {
-                        Text("Nutritions")
+                        Text("Favorites")
                             .font(.title2)
                             .bold()
                         
                         LazyVGrid(columns: columns) {
-                            ForEach(viewModel.results, id: \.self) { recipe in
+                            ForEach(viewModel.favRecipes, id: \.self) { recipe in
                                 NavigationLink {
-                                    RecipeDetailViewMyRecipe(recipe: recipe)
+                                    RecipeDetailView(id: recipe.id!)
                                 } label: {
                                     MyRecipesCard(recipe: recipe)
                                 }
@@ -31,10 +31,21 @@ struct MyRecipesView: View {
                         }
                     }
                     
-                    Text("Ingredients")
-                        .font(.title2)
-                        .bold()
-                    
+                    VStack(alignment: .leading) {
+                        Text("Saved Recipes")
+                            .font(.title2)
+                            .bold()
+                        
+                        LazyVGrid(columns: columns) {
+                            ForEach(viewModel.results, id: \.title) { recipe in
+                                NavigationLink {
+                                    RecipeDetailViewMyRecipe(recipe: recipe)
+                                } label: {
+                                    MyRecipesCardSavedRecipes(recipe: recipe)
+                                }
+                            }
+                        }
+                    }
                     
                     NavigationLink {
                         AddRecipeView()
@@ -52,9 +63,11 @@ struct MyRecipesView: View {
                     maxHeight: .infinity,
                     alignment: .topLeading
                   )
+                .padding()
                 .navigationTitle("My Recipes")
                 .onAppear {
                     viewModel.loadData()
+                    viewModel.loadFavRecipes()
                 }
             }
         }

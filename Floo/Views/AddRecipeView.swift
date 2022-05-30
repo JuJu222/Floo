@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct AddRecipeView: View {
+    @Environment(\.presentationMode) var presentation
     @State private var name: String = ""
     @State private var description: String = ""
+    @State private var calories: String = ""
+    @State private var carbs: String = ""
+    @State private var protein: String = ""
+    @State private var calcium: String = ""
+    @State var ingredientsName: [String] = [""]
+    @State var ingredientsAmount: [String] = [""]
+    @State var ingredientsUnit: [String] = [""]
+    @State var steps: [String] = [""]
     
-    init() {
-            UITableView.appearance().backgroundColor = .clear
-    }
+//    init() {
+//        UITableView.appearance().backgroundColor = .clear
+//    }
     
     var body: some View {
         NavigationView {
@@ -21,21 +30,82 @@ struct AddRecipeView: View {
                 Section(header: Text("General")) {
                     TextField("Name", text: $name)
                     TextField("Description", text: $description)
-                }
+                }.foregroundColor(.black)
                 
                 Section(header: Text("Nutritions")) {
-                    TextField("Calories", text: $name)
-                    TextField("Description", text: $description)
-                }
+                    TextField("Calories", text: $calories)
+                    TextField("Carbohydrates", text: $carbs)
+                    TextField("Protein", text: $protein)
+                    TextField("Calcium", text: $calcium)
+                }.foregroundColor(.black)
+                
+                Section(header: Text("Ingredients")) {
+                    ForEach(0..<ingredientsName.count, id: \.self) { index in
+                        HStack {
+                            TextField("Ingredient \(index + 1)", text: self.$ingredientsName[index])
+                            Divider()
+                            TextField("Amount", text: $ingredientsAmount[index])
+                            Divider()
+                            TextField("Unit", text: $ingredientsUnit[index])
+                        }
+                    }
+
+                    Button {
+                        self.ingredientsName.append("")
+                        self.ingredientsAmount.append("")
+                        self.ingredientsUnit.append("")
+                    } label: {
+                        Text("Add More Ingredients")
+                    }
+                }.foregroundColor(.black)
+                
+                Section(header: Text("Steps")) {
+                    ForEach(0..<steps.count, id: \.self) { index in
+                        TextField("Steps \(index + 1)", text: self.$steps[index])
+                    }
+
+                    Button {
+                        self.steps.append("")
+                    } label: {
+                        Text("Add More Steps")
+                    }
+                }.foregroundColor(.black)
                 
                 Button {
                     var recipe = RecipeDetail()
+                    recipe.nutrition = Nutrition()
+                    recipe.nutrition?.nutrients = [Flavonoid](repeating: Flavonoid(), count: 22)
+                    recipe.extendedIngredients = [ExtendedIngredient]()
+                    recipe.analyzedInstructions = [AnalyzedInstruction](repeating: AnalyzedInstruction(), count: 1)
+                    recipe.analyzedInstructions?[0].steps = [Step]()
                     recipe.title = name
+                    recipe.summary = description
+                    recipe.nutrition?.nutrients?[0].amount = Double(calories)
+                    recipe.nutrition?.nutrients?[3].amount = Double(carbs)
+                    recipe.nutrition?.nutrients?[8].amount = Double(protein)
+                    recipe.nutrition?.nutrients?[21].amount = Double(calcium)
+                    for (index, ingredient) in ingredientsName.enumerated() {
+                        var temp = ExtendedIngredient()
+                        temp.name = ingredient
+                        temp.amount = Double(ingredientsAmount[index])
+                        temp.unit = ingredientsUnit[index]
+                        recipe.extendedIngredients?.append(temp)
+                    }
+                    for step in steps {
+                        var temp = Step()
+                        temp.step = step
+                        recipe.analyzedInstructions?[0].steps?.append(temp)
+                    }
                     submitForm(recipe: recipe)
+//                    UserDefaults.standard.removeObject(forKey: "recipes")
+                    self.presentation.wrappedValue.dismiss()
                 } label: {
-                    Text("Submit")
+                    HStack {
+                        Spacer()
+                        Text("Submit")
+                        Spacer()
+                    }
                 }
-                .buttonStyle(.bordered)
             }
             .navigationTitle("Navigation")
         }
@@ -51,14 +121,13 @@ struct AddRecipeView: View {
 
                 // Decode Note
                 recipes = try decoder.decode([RecipeDetail].self, from: data)
-
-                print(recipes)
             } catch {
                 print("Unable to Decode Notes (\(error))")
             }
         }
         
         recipes.append(recipe)
+        print(recipes)
 
         do {
             // Create JSON Encoder
@@ -69,7 +138,6 @@ struct AddRecipeView: View {
 
             // Write/Set Data
             UserDefaults.standard.set(data, forKey: "recipes")
-
         } catch {
             print("Unable to Encode Array of Recipes (\(error))")
         }

@@ -14,16 +14,39 @@ struct MyRecipesCard: View {
         VStack {
             AsyncImage(url: URL(string: recipe.image ?? "")) { image in
                 image.resizable()
+                    .scaledToFill()
             } placeholder: {
-//                ProgressView()
-                Image("turtlerock")
+                ProgressView()
+//                Image("turtlerock")
+//                    .resizable()
+//                    .scaledToFill()
             }
-            .frame(width: 120, height: 180)
             .overlay {
                 TextOverlay(recipe: recipe)
             }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
             .cornerRadius(20)
             .shadow(radius: 7)
+                
+            Text(recipe.title ?? "")
+        }
+    }
+}
+
+struct MyRecipesCardSavedRecipes: View {
+    var recipe: RecipeDetail
+    
+    var body: some View {
+        VStack {
+            Image("Rectangle 8")
+                .resizable()
+                .scaledToFill()
+                .overlay {
+                    TextOverlay(recipe: recipe)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                .cornerRadius(20)
+                .shadow(radius: 7)
                 
             Text(recipe.title ?? "")
         }
@@ -43,14 +66,9 @@ struct TextOverlay: View {
     var body: some View {
         ZStack {
             gradient
-            VStack {
-                Text(recipe.title ?? "")
-                    .font(.title)
-                    .bold()
-                
-                Text("aaa")
-            }
-            .padding()
+            Text(recipe.title ?? "Title")
+                .font(.title)
+                .bold()
         }
         .foregroundColor(.white)
     }

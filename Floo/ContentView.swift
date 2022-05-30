@@ -12,23 +12,23 @@ struct ContentView: View {
         TabView {
             ExploreView()
                 .tabItem {
-                    Image(systemName: "phone.fill")
+                    Image(systemName: "safari.fill")
+                        .renderingMode(.template)
                     Text("Explore")
-                    
                 }
             MyRecipesView()
                 .tabItem {
-                    Image(systemName: "phone.fill")
+                    Image(systemName: "fork.knife")
+                        .renderingMode(.template)
                     Text("My Recipes")
-                    
                 }
             ProfileView()
                 .tabItem {
-                    Image(systemName: "phone.fill")
+                    Image(systemName: "person.fill")
+                        .renderingMode(.template)
                     Text("Profile")
-                    
                 }
-        }
+        }.accentColor(.black)
     }
 }
 

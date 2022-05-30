@@ -17,16 +17,19 @@ struct ExploreMenuCard: View {
                     .resizable()
                     .scaledToFill()
             } placeholder: {
-//                ProgressView()
-                Image("turtlerock")
-                    .resizable()
-                    .scaledToFill()
+                ProgressView()
+//                Image("turtlerock")
+//                    .resizable()
+//                    .scaledToFill()
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
             .cornerRadius(20)
             .shadow(radius: 7)
                 
             Text(recipe.title ?? "")
+                .font(.system(size: 14))
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }

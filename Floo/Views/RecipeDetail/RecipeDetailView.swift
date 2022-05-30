@@ -9,28 +9,40 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @StateObject var viewModel = RecipeDetailViewModel()
+    @State private var isFavorite: Bool = false
     var id: Int
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
+            VStack {
                 AsyncImage(url: URL(string: viewModel.results.image ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(3 / 2, contentMode: .fit)
                         .ignoresSafeArea()
                 } placeholder: {
-    //                ProgressView()
-                    Image("turtlerock")
-                        .resizable()
-                        .aspectRatio(3 / 2, contentMode: .fit)
-                        .ignoresSafeArea()
+                    ProgressView()
+//                    Image("turtlerock")
+//                        .resizable()
+//                        .aspectRatio(3 / 2, contentMode: .fit)
+//                        .ignoresSafeArea()
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(viewModel.results.title ?? "Title")
-                        .font(.title2)
-                        .bold()
+                    HStack {
+                        Text(viewModel.results.title ?? "Title")
+                            .font(.title2)
+                            .bold()
+                        
+                        FavoriteButton(isSet: $isFavorite)
+                            .onChange(of: isFavorite) {bool in
+                                if bool {
+                                    viewModel.setFavorite(id: viewModel.results.id!)
+                                } else {
+                                    viewModel.removeFavorite(id: viewModel.results.id!)
+                                }
+                            }
+                    }
                     
                     Text(viewModel.results.summary ?? "Description")
                         .font(.subheadline)
@@ -45,10 +57,14 @@ struct RecipeDetailView: View {
                                 Text(String(format: "%.0f", viewModel.results.nutrition?.nutrients?[0].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Calories")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("kcal")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -60,15 +76,19 @@ struct RecipeDetailView: View {
                                 Text(String(viewModel.results.nutrition?.nutrients?[3].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Carbo")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("gram")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "74C98C"))
                             .cornerRadius(16)
                         }
                     }
@@ -79,30 +99,38 @@ struct RecipeDetailView: View {
                                 Text(String(viewModel.results.nutrition?.nutrients?[8].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Protein")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("gram")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "8B85F0"))
                             .cornerRadius(16)
                             
                             HStack {
                                 Text(String(viewModel.results.nutrition?.nutrients?[21].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Calcium")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("mg")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "6BBFEB"))
                             .cornerRadius(16)
                         }
                     }
@@ -111,10 +139,9 @@ struct RecipeDetailView: View {
                         .font(.title2)
                         .bold()
                     
-                    VStack(alignment: .leading) {
-                        ForEach(viewModel.results.extendedIngredients ?? [ExtendedIngredient](), id: \.self) { ingredient in
-                            Text(ingredient.name ?? "Ingredient")
-                                .padding()
+                    VStack(alignment: .leading,  spacing: 10) {
+                        ForEach(Array((viewModel.results.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
+                            Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
                         }
                     }
                     
@@ -122,10 +149,9 @@ struct RecipeDetailView: View {
                         .font(.title2)
                         .bold()
                     
-                    VStack(alignment: .leading) {
-                        ForEach(viewModel.results.analyzedInstructions?[0].steps ?? [Step](), id: \.self) { step in
-                            Text(step.step ?? "Step")
-                                .padding()
+                    VStack(alignment: .leading,  spacing: 10) {
+                        ForEach(Array((viewModel.results.analyzedInstructions?[0].steps ?? [Step]()).enumerated()), id: \.offset) { i, step in
+                            Text("\(i + 1). \(step.step ?? "Step")")
                         }
                     }
                 }
@@ -146,16 +172,27 @@ struct RecipeDetailViewMyRecipe: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Image("turtlerock")
+            VStack {
+                Image("Rectangle 8")
                     .resizable()
                     .aspectRatio(3 / 2, contentMode: .fit)
                     .ignoresSafeArea()
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(recipe.title ?? "Title")
-                        .font(.title2)
-                        .bold()
+                    HStack {
+                        Text(recipe.title ?? "Title")
+                            .font(.title2)
+                            .bold()
+                        
+//                        FavoriteButton(isSet: $isFavorite)
+//                            .onChange(of: isFavorite) {bool in
+//                                if bool {
+//                                    viewModel.setFavorite(id: viewModel.results.id!)
+//                                } else {
+//                                    viewModel.removeFavorite(id: viewModel.results.id!)
+//                                }
+//                            }
+                    }
                     
                     Text(recipe.summary ?? "Description")
                         .font(.subheadline)
@@ -170,10 +207,14 @@ struct RecipeDetailViewMyRecipe: View {
                                 Text(String(format: "%.0f", recipe.nutrition?.nutrients?[0].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Calories")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("kcal")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -185,15 +226,19 @@ struct RecipeDetailViewMyRecipe: View {
                                 Text(String(recipe.nutrition?.nutrients?[3].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Carbo")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("gram")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "74C98C"))
                             .cornerRadius(16)
                         }
                     }
@@ -204,30 +249,38 @@ struct RecipeDetailViewMyRecipe: View {
                                 Text(String(recipe.nutrition?.nutrients?[8].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Protein")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("gram")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "8B85F0"))
                             .cornerRadius(16)
                             
                             HStack {
                                 Text(String(recipe.nutrition?.nutrients?[21].amount ?? 0.0))
                                     .font(.title2)
                                     .bold()
+                                    .foregroundColor(Color(.white))
                                 
                                 VStack {
                                     Text("Calcium")
+                                        .bold()
+                                        .foregroundColor(Color(.white))
                                     Text("mg")
+                                        .foregroundColor(Color(.white))
                                 }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(.secondary)
+                            .background(Color(hex: "6BBFEB"))
                             .cornerRadius(16)
                         }
                     }
@@ -236,10 +289,9 @@ struct RecipeDetailViewMyRecipe: View {
                         .font(.title2)
                         .bold()
                     
-                    VStack(alignment: .leading) {
-                        ForEach(recipe.extendedIngredients ?? [ExtendedIngredient](), id: \.self) { ingredient in
-                            Text(ingredient.name ?? "Ingredient")
-                                .padding()
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(Array((recipe.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
+                            Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
                         }
                     }
                     
@@ -247,10 +299,9 @@ struct RecipeDetailViewMyRecipe: View {
                         .font(.title2)
                         .bold()
                     
-                    VStack(alignment: .leading) {
-                        ForEach(recipe.analyzedInstructions?[0].steps ?? [Step](), id: \.self) { step in
-                            Text(step.step ?? "Step")
-                                .padding()
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(Array((recipe.analyzedInstructions?[0].steps ?? [Step]()).enumerated()), id: \.offset) { i, step in
+                            Text("\(i + 1). \(step.step ?? "Step")")
                         }
                     }
                 }

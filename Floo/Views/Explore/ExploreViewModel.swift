@@ -27,8 +27,8 @@ class ExploreViewModel: ObservableObject {
                     guard let data = data else { return }
                     DispatchQueue.main.async {
                         do {
-                            let decodedUsers = try JSONDecoder().decode(RecipeAll.self, from: data)
-                            self.results = decodedUsers.recipes
+                            let result = try JSONDecoder().decode(RecipeAll.self, from: data)
+                            self.results = result.recipes
                         } catch let error {
                             print("Error decoding: ", error)
                         }
