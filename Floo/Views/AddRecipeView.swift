@@ -124,7 +124,7 @@ struct AddRecipeView: View {
                     }
                 }
             }
-            .navigationTitle("Navigation")
+            .navigationTitle("Add Recipe")
         }
     }
     
