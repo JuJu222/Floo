@@ -19,78 +19,41 @@ struct ProfileView: View {
             VStack {
                 ProfileOverlay()
                 
-                VStack(alignment: .leading) {
-                    ZStack {
-                        Color(.white)
-                            .shadow(color: .black, radius: 20, x: 0, y: -20)
-                            .cornerRadius(10, corners: [.topLeft, .topRight])
+                ZStack {
+                    Color(.white)
+                        .shadow(color: .black, radius: 20, x: 0, y: -20)
+                        .cornerRadius(10, corners: [.topLeft, .topRight])
+                        
+                    VStack {
+                        Picker(selection: $selected, label: Text(""), content: {
+                            Text("Chef Info").tag(0)
+                            Text("4 Recipes").tag(1)
+                        }).pickerStyle(SegmentedPickerStyle())
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("About ")
+                                .font(.title2)
+                                .bold()
                             
-                            VStack {
-                                Picker(selection: $selected, label: Text(""), content: {
-                                    Text("Chef Info").tag(0)
-                                    Text("4 Recipes").tag(1)
-                                }).pickerStyle(SegmentedPickerStyle())
-                                
-                                Divider()
-                                
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Text("About ")
-                                        .font(.title2)
-                                        .bold()
-                                    
-                                    Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
-                                    
-                                    Text("Speciality ")
-                                        .font(.title2)
-                                        .bold()
-                                    
-                                    Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
-                                }
-                            }.padding()
-                    }
+                            Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
+                            
+                            Text("Speciality ")
+                                .font(.title2)
+                                .bold()
+                            
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("- Butter Chicken")
+                                Text("- Prata Bread")
+                                Text("- Fish Curry")
+                                Text("- Kofta")
+                            }
+                        }
+                    }.padding()
                 }
-                .cornerRadius(20, corners: [.topLeft, .topRight])
-
             }
         }
-//        VStack {
-//            Image("Rectangle 8")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .overlay {
-//                    ProfileOverlay()
-//                }
-//
-//            VStack(alignment: .leading) {
-//                ZStack {
-//                    Color(.white)
-//                        .shadow(color: .black, radius: 20, x: 0, y: -20)
-//                        .cornerRadius(10, corners: [.topLeft, .topRight])
-//
-//                        VStack {
-//                            Divider()
-//
-//                            VStack(alignment: .leading, spacing: 10) {
-//                                Text("About ")
-//                                    .font(.title2)
-//                                    .bold()
-//
-//                                Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
-//
-//                                Text("Speciality ")
-//                                    .font(.title2)
-//                                    .bold()
-//
-//                                Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
-//                            }
-//                        }
-//                }.padding()
-//
-//            }
-//            .offset(y: -20)
-//            .cornerRadius(20, corners: [.topLeft, .topRight])
-//
-//        }
     }
 }
 
