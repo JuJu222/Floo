@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyRecipesView: View {
     @StateObject var viewModel = MyRecipesViewModel()
-    private var columns = [GridItem(.flexible()), GridItem(.flexible())]
+    private var columns = [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)]
     
     var body: some View {
         NavigationView {
