@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExploreMenuCard: View {
-    var recipe: RecipeDetail
+    var recipe: Result
     
     var body: some View {
         VStack {
@@ -36,6 +36,6 @@ struct ExploreMenuCard: View {
 
 struct ExploreMenuCard_Previews: PreviewProvider {
     static var previews: some View {
-        ExploreMenuCard(recipe: RecipeDetail())
+        ExploreMenuCard(recipe: Result())
     }
 }

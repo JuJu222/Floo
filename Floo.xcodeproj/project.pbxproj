@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0404482F283FD973008612C2 /* MyRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0404482E283FD973008612C2 /* MyRecipesViewModel.swift */; };
+		040A327B2845B41700CAB6F2 /* RecipeSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A327A2845B41700CAB6F2 /* RecipeSearch.swift */; };
 		040E001C2827E8F600524A57 /* FlooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E001B2827E8F600524A57 /* FlooApp.swift */; };
 		040E001E2827E8F600524A57 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E001D2827E8F600524A57 /* ContentView.swift */; };
 		040E00202827E8F800524A57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040E001F2827E8F800524A57 /* Assets.xcassets */; };
@@ -17,7 +18,6 @@
 		040E002F282806BE00524A57 /* MyRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E002E282806BE00524A57 /* MyRecipesView.swift */; };
 		040E003128280C0700524A57 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003028280C0700524A57 /* ProfileView.swift */; };
 		040E003328280C1900524A57 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003228280C1900524A57 /* AddRecipeView.swift */; };
-		040E0038282E915200524A57 /* RecipeAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0037282E915200524A57 /* RecipeAll.swift */; };
 		040E003A282FB3E500524A57 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E0039282FB3E500524A57 /* ExploreViewModel.swift */; };
 		040E003E2831681700524A57 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003D2831681700524A57 /* RecipeDetailViewModel.swift */; };
 		040E00402831688A00524A57 /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E003F2831688A00524A57 /* RecipeDetail.swift */; };
@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0404482E283FD973008612C2 /* MyRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesViewModel.swift; sourceTree = "<group>"; };
+		040A327A2845B41700CAB6F2 /* RecipeSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSearch.swift; sourceTree = "<group>"; };
 		040E00182827E8F600524A57 /* Floo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Floo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		040E001B2827E8F600524A57 /* FlooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlooApp.swift; sourceTree = "<group>"; };
 		040E001D2827E8F600524A57 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,7 +43,6 @@
 		040E002E282806BE00524A57 /* MyRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesView.swift; sourceTree = "<group>"; };
 		040E003028280C0700524A57 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		040E003228280C1900524A57 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
-		040E0037282E915200524A57 /* RecipeAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAll.swift; sourceTree = "<group>"; };
 		040E0039282FB3E500524A57 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		040E003D2831681700524A57 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
 		040E003F2831688A00524A57 /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
@@ -119,9 +119,9 @@
 		040E0036282E914400524A57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				040E0037282E915200524A57 /* RecipeAll.swift */,
 				040E003F2831688A00524A57 /* RecipeDetail.swift */,
 				040E004928368ABB00524A57 /* User.swift */,
+				040A327A2845B41700CAB6F2 /* RecipeSearch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,11 +246,11 @@
 				040E004C283A364900524A57 /* HTMLStringView.swift in Sources */,
 				049D58F128422A8100ABE3CE /* FavoriteButton.swift in Sources */,
 				0404482F283FD973008612C2 /* MyRecipesViewModel.swift in Sources */,
-				040E0038282E915200524A57 /* RecipeAll.swift in Sources */,
 				040E0048283688C100524A57 /* MyRecipesCard.swift in Sources */,
 				040E004A28368ABB00524A57 /* User.swift in Sources */,
 				040E001C2827E8F600524A57 /* FlooApp.swift in Sources */,
 				040E00402831688A00524A57 /* RecipeDetail.swift in Sources */,
+				040A327B2845B41700CAB6F2 /* RecipeSearch.swift in Sources */,
 				040E002F282806BE00524A57 /* MyRecipesView.swift in Sources */,
 				040E003A282FB3E500524A57 /* ExploreViewModel.swift in Sources */,
 				040E003128280C0700524A57 /* ProfileView.swift in Sources */,

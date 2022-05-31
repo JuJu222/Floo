@@ -28,6 +28,14 @@ struct ExploreView: View {
             }
             .padding()
             .searchable(text: $searchText)
+            .onSubmit(of: .search) {
+                viewModel.searchData(query: searchText)
+            }
+            .onChange(of: searchText) { searchText in
+                if (searchText.isEmpty) {
+                    viewModel.loadData()
+                }
+            }
             .navigationTitle("Explore Recipes")
             .onAppear {
                 viewModel.loadData()
