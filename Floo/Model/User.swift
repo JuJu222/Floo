@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct Person {
+struct User: Codable {
     var name: String = ""
     var title: String = ""
     var about: String = ""
-    var specialty: [String] = []
+    var specialities: [String] = []
+    
+    static let `default` = User()
 }

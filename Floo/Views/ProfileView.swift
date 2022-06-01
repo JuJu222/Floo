@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewModel = MyRecipesViewModel()
     @State var selected = 0
+    @State var user = User()
     private var columns = [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)]
     
     var body: some View {
@@ -20,7 +21,7 @@ struct ProfileView: View {
                 //                .aspectRatio(contentMode: .fill)
                 
                 VStack {
-                    ProfileOverlay()
+                    ProfileOverlay(user: user)
                     
                     ZStack {
                         Color(.white)
@@ -42,17 +43,16 @@ struct ProfileView: View {
                                             .font(.title2)
                                             .bold()
                                         
-                                        Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
+                                        Text(user.about)
                                         
                                         Text("Speciality ")
                                             .font(.title2)
                                             .bold()
                                         
                                         VStack(alignment: .leading, spacing: 6) {
-                                            Text("- Butter Chicken")
-                                            Text("- Prata Bread")
-                                            Text("- Fish Curry")
-                                            Text("- Kofta")
+                                            ForEach(user.specialities, id: \.self) { speciality in
+                                                Text("- " + speciality)
+                                            }
                                         }
                                     } else {
                                         LazyVGrid(columns: columns) {
@@ -71,13 +71,35 @@ struct ProfileView: View {
                     }
                 }.onAppear {
                     viewModel.loadData()
+                    getUser()
                 }
             }.navigationBarHidden(true)
+        }
+    }
+    
+    func getUser() {
+        var user = User()
+        if let data = UserDefaults.standard.data(forKey: "user") {
+            do {
+                // Create JSON Decoder
+                let decoder = JSONDecoder()
+                
+                // Decode Note
+                user = try decoder.decode(User.self, from: data)
+                
+                self.user.name = user.name
+                self.user.title = user.title
+                self.user.about = user.about
+                self.user.specialities = user.specialities
+            } catch {
+                print("Unable to Decode Notes (\(error))")
+            }
         }
     }
 }
 
 struct ProfileOverlay: View {
+    @State var user: User
     var gradient: LinearGradient {
         .linearGradient(
             Gradient(colors: [.black.opacity(0.6), .black.opacity(0)]),
@@ -93,11 +115,22 @@ struct ProfileOverlay: View {
                     .clipShape(Circle())
                     .shadow(radius: 7)
                 
-                Text("Kenny Jinhiro")
+                Text(user.name)
                     .font(.title)
                     .bold()
                 
-                Text("Home Chef")
+                Text(user.title)
+                
+                NavigationLink {
+                    EditProfileView(user: $user)
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Edit Profile")
+                        Spacer()
+                    }
+                }
+                .buttonStyle(.bordered)
             }
             .padding()
         }
