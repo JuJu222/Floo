@@ -14,155 +14,158 @@ struct RecipeDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                AsyncImage(url: URL(string: viewModel.results.image ?? "")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(3 / 2, contentMode: .fit)
-                        .ignoresSafeArea()
-                } placeholder: {
-                    ProgressView()
-//                    Image("turtlerock")
-//                        .resizable()
-//                        .aspectRatio(3 / 2, contentMode: .fit)
-//                        .ignoresSafeArea()
-                }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        Text(viewModel.results.title ?? "Title")
+            if (viewModel.loading) {
+                ProgressView()
+            } else {
+                VStack {
+                    AsyncImage(url: URL(string: viewModel.results.image ?? "")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(3 / 2, contentMode: .fit)
+                            .ignoresSafeArea()
+                    } placeholder: {
+                        ProgressView()
+    //                    Image("turtlerock")
+    //                        .resizable()
+    //                        .aspectRatio(3 / 2, contentMode: .fit)
+    //                        .ignoresSafeArea()
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Text(viewModel.results.title ?? "Title")
+                                .font(.title2)
+                                .bold()
+                            
+                            FavoriteButton(isSet: $isFavorite)
+                                .onChange(of: isFavorite) {bool in
+                                    if bool {
+                                        viewModel.setFavorite(id: viewModel.results.id!)
+                                    } else {
+                                        viewModel.removeFavorite(id: viewModel.results.id!)
+                                    }
+                                }
+                        }
+                        
+                        Text(viewModel.results.summary ?? "Description")
+                            .font(.subheadline)
+
+                        Text("Nutritions")
                             .font(.title2)
                             .bold()
                         
-                        FavoriteButton(isSet: $isFavorite)
-                            .onChange(of: isFavorite) {bool in
-                                if bool {
-                                    viewModel.setFavorite(id: viewModel.results.id!)
-                                } else {
-                                    viewModel.removeFavorite(id: viewModel.results.id!)
-                                }
-                            }
-                    }
-                    
-                    Text(viewModel.results.summary ?? "Description")
-                        .font(.subheadline)
-
-                    Text("Nutritions")
-                        .font(.title2)
-                        .bold()
-                    
-                    VStack {
-                        HStack {
+                        VStack {
                             HStack {
-                                Text(String(format: "%.0f", viewModel.results.nutrition?.nutrients?[0].amount ?? 0.0))
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(Color(.white))
-                                
-                                VStack {
-                                    Text("Calories")
+                                HStack {
+                                    Text(String(format: "%.0f", viewModel.results.nutrition?.nutrients?[0].amount ?? 0.0))
+                                        .font(.title2)
                                         .bold()
                                         .foregroundColor(Color(.white))
-                                    Text("kcal")
-                                        .foregroundColor(Color(.white))
+                                    
+                                    VStack {
+                                        Text("Calories")
+                                            .bold()
+                                            .foregroundColor(Color(.white))
+                                        Text("kcal")
+                                            .foregroundColor(Color(.white))
+                                    }
                                 }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "E88787"))
-                            .cornerRadius(16)
-                            
-                            HStack {
-                                Text(String(viewModel.results.nutrition?.nutrients?[3].amount ?? 0.0))
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(Color(.white))
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(hex: "E88787"))
+                                .cornerRadius(16)
                                 
-                                VStack {
-                                    Text("Carbo")
+                                HStack {
+                                    Text(String(viewModel.results.nutrition?.nutrients?[3].amount ?? 0.0))
+                                        .font(.title2)
                                         .bold()
                                         .foregroundColor(Color(.white))
-                                    Text("gram")
-                                        .foregroundColor(Color(.white))
+                                    
+                                    VStack {
+                                        Text("Carbo")
+                                            .bold()
+                                            .foregroundColor(Color(.white))
+                                        Text("gram")
+                                            .foregroundColor(Color(.white))
+                                    }
                                 }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(hex: "74C98C"))
+                                .cornerRadius(16)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "74C98C"))
-                            .cornerRadius(16)
                         }
-                    }
-                    
-                    VStack {
-                        HStack {
+                        
+                        VStack {
                             HStack {
-                                Text(String(viewModel.results.nutrition?.nutrients?[8].amount ?? 0.0))
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(Color(.white))
-                                
-                                VStack {
-                                    Text("Protein")
+                                HStack {
+                                    Text(String(viewModel.results.nutrition?.nutrients?[8].amount ?? 0.0))
+                                        .font(.title2)
                                         .bold()
                                         .foregroundColor(Color(.white))
-                                    Text("gram")
-                                        .foregroundColor(Color(.white))
+                                    
+                                    VStack {
+                                        Text("Protein")
+                                            .bold()
+                                            .foregroundColor(Color(.white))
+                                        Text("gram")
+                                            .foregroundColor(Color(.white))
+                                    }
                                 }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "8B85F0"))
-                            .cornerRadius(16)
-                            
-                            HStack {
-                                Text(String(viewModel.results.nutrition?.nutrients?[21].amount ?? 0.0))
-                                    .font(.title2)
-                                    .bold()
-                                    .foregroundColor(Color(.white))
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(hex: "8B85F0"))
+                                .cornerRadius(16)
                                 
-                                VStack {
-                                    Text("Calcium")
+                                HStack {
+                                    Text(String(viewModel.results.nutrition?.nutrients?[21].amount ?? 0.0))
+                                        .font(.title2)
                                         .bold()
                                         .foregroundColor(Color(.white))
-                                    Text("mg")
-                                        .foregroundColor(Color(.white))
+                                    
+                                    VStack {
+                                        Text("Calcium")
+                                            .bold()
+                                            .foregroundColor(Color(.white))
+                                        Text("mg")
+                                            .foregroundColor(Color(.white))
+                                    }
                                 }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(hex: "6BBFEB"))
+                                .cornerRadius(16)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "6BBFEB"))
-                            .cornerRadius(16)
+                        }
+                        
+                        Text("Ingredients")
+                            .font(.title2)
+                            .bold()
+                        
+                        VStack(alignment: .leading,  spacing: 10) {
+                            ForEach(Array((viewModel.results.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
+                                Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
+                            }
+                        }
+                        
+                        Text("Steps")
+                            .font(.title2)
+                            .bold()
+                        
+                        VStack(alignment: .leading,  spacing: 10) {
+                            ForEach(Array((viewModel.results.analyzedInstructions?[0].steps ?? [Step]()).enumerated()), id: \.offset) { i, step in
+                                Text("\(i + 1). \(step.step ?? "Step")")
+                            }
                         }
                     }
+                    .padding()
                     
-                    Text("Ingredients")
-                        .font(.title2)
-                        .bold()
-                    
-                    VStack(alignment: .leading,  spacing: 10) {
-                        ForEach(Array((viewModel.results.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
-                            Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
-                        }
-                    }
-                    
-                    Text("Steps")
-                        .font(.title2)
-                        .bold()
-                    
-                    VStack(alignment: .leading,  spacing: 10) {
-                        ForEach(Array((viewModel.results.analyzedInstructions?[0].steps ?? [Step]()).enumerated()), id: \.offset) { i, step in
-                            Text("\(i + 1). \(step.step ?? "Step")")
-                        }
-                    }
+                    Spacer()
                 }
-                .padding()
-                
-                Spacer()
             }
-            .onAppear {
-                viewModel.loadData(id: self.id)
-                print(self.id)
-            }
+        }.onAppear {
+            viewModel.loadData(id: self.id)
+            print(self.id)
         }
     }
 }

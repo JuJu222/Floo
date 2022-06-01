@@ -8,10 +8,11 @@
 import Foundation
 
 class RecipeDetailViewModel: ObservableObject {
-    
+    @Published var loading = true
     @Published var results: RecipeDetail = RecipeDetail()
     
     func loadData(id: Int) {
+        self.loading = true
         guard let url = URL(string: "https://api.spoonacular.com/recipes/\(id)/information?apiKey=\(ApiKey.apiKeys[1])&includeNutrition=true") else { fatalError("Missing URL") }
 
             let urlRequest = URLRequest(url: url)
@@ -32,6 +33,7 @@ class RecipeDetailViewModel: ObservableObject {
                             self.results = result
                             self.results.summary = self.results.summary!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
                             print(self.results)
+                            self.loading = false
                         } catch let error {
                             print("Error decoding: ", error)
                         }

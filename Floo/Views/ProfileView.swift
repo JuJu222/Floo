@@ -8,51 +8,71 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @StateObject var viewModel = MyRecipesViewModel()
     @State var selected = 0
+    private var columns = [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)]
     
     var body: some View {
-        ZStack {
-            Image("Rectangle 8")
-                .resizable()
-//                .aspectRatio(contentMode: .fill)
-            
-            VStack {
-                ProfileOverlay()
+        NavigationView {
+            ZStack {
+                Image("Rectangle 8")
+                    .resizable()
+                //                .aspectRatio(contentMode: .fill)
                 
-                ZStack {
-                    Color(.white)
-                        .shadow(color: .black, radius: 20, x: 0, y: -20)
-                        .cornerRadius(10, corners: [.topLeft, .topRight])
+                VStack {
+                    ProfileOverlay()
+                    
+                    ZStack {
+                        Color(.white)
+                            .shadow(color: .black, radius: 20, x: 0, y: -20)
+                            .cornerRadius(10, corners: [.topLeft, .topRight])
                         
-                    VStack {
-                        Picker(selection: $selected, label: Text(""), content: {
-                            Text("Chef Info").tag(0)
-                            Text("4 Recipes").tag(1)
-                        }).pickerStyle(SegmentedPickerStyle())
-                        
-                        Divider()
-                        
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("About ")
-                                .font(.title2)
-                                .bold()
+                        VStack {
+                            Picker(selection: $selected, label: Text(""), content: {
+                                Text("Chef Info").tag(0)
+                                Text("\(viewModel.results.count) Recipes").tag(1)
+                            }).pickerStyle(SegmentedPickerStyle())
                             
-                            Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
+                            Divider()
                             
-                            Text("Speciality ")
-                                .font(.title2)
-                                .bold()
-                            
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("- Butter Chicken")
-                                Text("- Prata Bread")
-                                Text("- Fish Curry")
-                                Text("- Kofta")
+                            ScrollView {
+                                VStack(alignment: .leading, spacing: 10) {
+                                    if (selected == 0) {
+                                        Text("About ")
+                                            .font(.title2)
+                                            .bold()
+                                        
+                                        Text("After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.")
+                                        
+                                        Text("Speciality ")
+                                            .font(.title2)
+                                            .bold()
+                                        
+                                        VStack(alignment: .leading, spacing: 6) {
+                                            Text("- Butter Chicken")
+                                            Text("- Prata Bread")
+                                            Text("- Fish Curry")
+                                            Text("- Kofta")
+                                        }
+                                    } else {
+                                        LazyVGrid(columns: columns) {
+                                            ForEach(viewModel.results, id: \.title) { recipe in
+                                                NavigationLink {
+                                                    RecipeDetailViewMyRecipe(recipe: recipe)
+                                                } label: {
+                                                    MyRecipesCardSavedRecipes(recipe: recipe)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                        }
-                    }.padding()
+                        }.padding()
+                    }
+                }.onAppear {
+                    viewModel.loadData()
                 }
-            }
+            }.navigationBarHidden(true)
         }
     }
 }
@@ -64,7 +84,7 @@ struct ProfileOverlay: View {
             startPoint: .bottom,
             endPoint: .center)
     }
-
+    
     var body: some View {
         ZStack {
             gradient
