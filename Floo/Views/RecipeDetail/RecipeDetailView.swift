@@ -308,7 +308,7 @@ struct RecipeDetailViewMyRecipe: View {
                 
                 Spacer()
             }
-        }.navigationBarTitle("Title", displayMode: .inline)
+        }.navigationBarTitle("", displayMode: .inline)
     }
     
     func deleteSavedRecipe(id: Int) {
