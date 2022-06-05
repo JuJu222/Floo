@@ -299,6 +299,7 @@ struct RecipeDetailViewMyRecipe: View {
                                 Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
                                 Text(String(ingredient.amount ?? 1))
                                 Text(ingredient.unit ?? "")
+                                Spacer()
                             }
                         }
                     }
