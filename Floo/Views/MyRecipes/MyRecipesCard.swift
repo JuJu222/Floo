@@ -17,9 +17,6 @@ struct MyRecipesCard: View {
                     .scaledToFill()
             } placeholder: {
                 ProgressView()
-//                Image("turtlerock")
-//                    .resizable()
-//                    .scaledToFill()
             }
             .overlay {
                 TextOverlay(recipe: recipe)
@@ -48,7 +45,7 @@ struct MyRecipesCardSavedRecipes: View {
                 .cornerRadius(20)
                 .shadow(radius: 7)
                 
-            recipe.cuisines?.reduce(Text(""), { $0 + Text($1) + Text(", ")} )
+            recipe.cuisines?.reduce(Text(""), { $0 + Text($1) + Text(" ")} )
         }
     }
 }

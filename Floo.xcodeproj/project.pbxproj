@@ -68,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040A327E2848FA7800CAB6F2 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				040E003028280C0700524A57 /* ProfileView.swift */,
+				040A327C2847445500CAB6F2 /* EditProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		040E000F2827E8F600524A57 = {
 			isa = PBXGroup;
 			children = (
@@ -109,12 +118,10 @@
 		040E002B2827F39900524A57 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				040A327E2848FA7800CAB6F2 /* Profile */,
 				040E0046283687D400524A57 /* MyRecipes */,
 				040E003C283167FF00524A57 /* RecipeDetail */,
 				040E003B2831676700524A57 /* Explore */,
-				040E003028280C0700524A57 /* ProfileView.swift */,
-				040E003228280C1900524A57 /* AddRecipeView.swift */,
-				040A327C2847445500CAB6F2 /* EditProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +169,7 @@
 		040E0046283687D400524A57 /* MyRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				040E003228280C1900524A57 /* AddRecipeView.swift */,
 				040E002E282806BE00524A57 /* MyRecipesView.swift */,
 				040E0047283688C100524A57 /* MyRecipesCard.swift */,
 				0404482E283FD973008612C2 /* MyRecipesViewModel.swift */,

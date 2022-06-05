@@ -21,15 +21,14 @@ struct AddRecipeView: View {
     @State var ingredientsUnit: [String] = [""]
     @State var steps: [String] = [""]
     
-    //    init() {
-    //        UITableView.appearance().backgroundColor = .clear
-    //    }
-    
     var body: some View {
         Form {
             Section(header: Text("General")) {
                 TextField("Name", text: $name)
-                TextField("Description", text: $description)
+            }.foregroundColor(.black)
+            
+            Section(header: Text("Description")) {
+                TextEditor(text: $description)
             }.foregroundColor(.black)
             
             Section(header: Text("Nutritions")) {
@@ -45,7 +44,7 @@ struct AddRecipeView: View {
                 }
                 
                 Button {
-                    self.steps.append("")
+                    self.cuisines.append("")
                 } label: {
                     Text("Add More Cuisines")
                 }
@@ -73,7 +72,7 @@ struct AddRecipeView: View {
             
             Section(header: Text("Steps")) {
                 ForEach(0..<steps.count, id: \.self) { index in
-                    TextField("Steps \(index + 1)", text: self.$steps[index])
+                    TextField("Step \(index + 1)", text: self.$steps[index])
                 }
                 
                 Button {
@@ -113,7 +112,6 @@ struct AddRecipeView: View {
                     recipe.analyzedInstructions?[0].steps?.append(temp)
                 }
                 submitForm(recipe: recipe)
-                //                    UserDefaults.standard.removeObject(forKey: "recipes")
                 self.presentation.wrappedValue.dismiss()
             } label: {
                 HStack {
@@ -131,27 +129,25 @@ struct AddRecipeView: View {
         
         if let data = UserDefaults.standard.data(forKey: "recipes") {
             do {
-                // Create JSON Decoder
                 let decoder = JSONDecoder()
                 
-                // Decode Note
                 recipes = try decoder.decode([RecipeDetail].self, from: data)
             } catch {
                 print("Unable to Decode Notes (\(error))")
             }
         }
         
-        recipes.append(recipe)
+        var temp = recipe
+        let id = recipes.last?.id ?? 1234567889
+        temp.id = id + 1
+        recipes.append(temp)
         print(recipes)
         
         do {
-            // Create JSON Encoder
             let encoder = JSONEncoder()
             
-            // Encode Note
             let data = try encoder.encode(recipes)
             
-            // Write/Set Data
             UserDefaults.standard.set(data, forKey: "recipes")
         } catch {
             print("Unable to Encode Array of Recipes (\(error))")

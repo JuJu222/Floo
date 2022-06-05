@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject var viewModel = MyRecipesViewModel()
     @State var selected = 0
-    @State var user = User()
+    @State var user = User(name: "Justin Jap", title: "Home Chef", about: "After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.", specialities: ["Butter Chicken", "Prata Bread", "Fish Curry", "Kofta"])
     private var columns = [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)]
     
     var body: some View {
@@ -18,7 +18,6 @@ struct ProfileView: View {
             ZStack {
                 Image("Rectangle 8")
                     .resizable()
-                //                .aspectRatio(contentMode: .fill)
                 
                 VStack {
                     ProfileOverlay(user: user)
@@ -39,13 +38,13 @@ struct ProfileView: View {
                             ScrollView {
                                 VStack(alignment: .leading, spacing: 10) {
                                     if (selected == 0) {
-                                        Text("About ")
+                                        Text("About")
                                             .font(.title2)
                                             .bold()
                                         
                                         Text(user.about)
                                         
-                                        Text("Speciality ")
+                                        Text("Speciality")
                                             .font(.title2)
                                             .bold()
                                         
@@ -78,13 +77,11 @@ struct ProfileView: View {
     }
     
     func getUser() {
-        var user = User()
+//        UserDefaults.standard.removeObject(forKey: "user")
         if let data = UserDefaults.standard.data(forKey: "user") {
             do {
-                // Create JSON Decoder
                 let decoder = JSONDecoder()
                 
-                // Decode Note
                 user = try decoder.decode(User.self, from: data)
                 
                 self.user.name = user.name
@@ -93,6 +90,16 @@ struct ProfileView: View {
                 self.user.specialities = user.specialities
             } catch {
                 print("Unable to Decode Notes (\(error))")
+            }
+        } else {
+            do {
+                let encoder = JSONEncoder()
+                
+                let data = try encoder.encode(self.user)
+                
+                UserDefaults.standard.set(data, forKey: "user")
+            } catch {
+                print("Unable to Encode Array of Recipes (\(error))")
             }
         }
     }

@@ -11,10 +11,6 @@ struct EditProfileView: View {
     @Binding var user: User
     @Environment(\.presentationMode) var presentation
     
-    //    init() {
-    //        UITableView.appearance().backgroundColor = .clear
-    //    }
-    
     var body: some View {
         Form {
             Section(header: Text("General")) {
@@ -53,14 +49,12 @@ struct EditProfileView: View {
     }
     
     func submitForm(editedUser: User) {
-        var user = User()
+        var user = User(name: "Justin Jap", title: "Home Chef", about: "After attending computer science school, I am interested in cooking food especially Indian food. Prata bread and butter chicken are my favourite foods.", specialities: ["Butter Chicken", "Prata Bread", "Fish Curry", "Kofta"])
         
         if let data = UserDefaults.standard.data(forKey: "user") {
             do {
-                // Create JSON Decoder
                 let decoder = JSONDecoder()
                 
-                // Decode Note
                 user = try decoder.decode(User.self, from: data)
             } catch {
                 print("Unable to Decode Notes (\(error))")
@@ -70,13 +64,10 @@ struct EditProfileView: View {
         user = editedUser
         
         do {
-            // Create JSON Encoder
             let encoder = JSONEncoder()
             
-            // Encode Note
             let data = try encoder.encode(user)
             
-            // Write/Set Data
             UserDefaults.standard.set(data, forKey: "user")
         } catch {
             print("Unable to Encode Array of Recipes (\(error))")

@@ -8,6 +8,7 @@
 import Foundation
 
 class RecipeDetailViewModel: ObservableObject {
+    @Published var isFav = false
     @Published var loading = true
     @Published var results: RecipeDetail = RecipeDetail()
     
@@ -34,6 +35,24 @@ class RecipeDetailViewModel: ObservableObject {
                             self.results.summary = self.results.summary!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
                             print(self.results)
                             self.loading = false
+                            
+                            var favRecipesId = [Int]()
+                            
+                            if let data = UserDefaults.standard.data(forKey: "favRecipesId") {
+                                do {
+                                    let decoder = JSONDecoder()
+
+                                    favRecipesId = try decoder.decode([Int].self, from: data)
+                                } catch {
+                                    print("Unable to Decode Notes (\(error))")
+                                }
+                            }
+                            
+                            for id in favRecipesId  {
+                                if (id == self.results.id) {
+                                    self.isFav = true
+                                }
+                            }
                         } catch let error {
                             print("Error decoding: ", error)
                         }
@@ -49,10 +68,8 @@ class RecipeDetailViewModel: ObservableObject {
         
         if let data = UserDefaults.standard.data(forKey: "favRecipesId") {
             do {
-                // Create JSON Decoder
                 let decoder = JSONDecoder()
 
-                // Decode Note
                 favRecipesId = try decoder.decode([Int].self, from: data)
             } catch {
                 print("Unable to Decode Notes (\(error))")
@@ -64,13 +81,10 @@ class RecipeDetailViewModel: ObservableObject {
         print(favRecipesId)
 
         do {
-            // Create JSON Encoder
             let encoder = JSONEncoder()
 
-            // Encode Note
             let data = try encoder.encode(favRecipesId)
 
-            // Write/Set Data
             UserDefaults.standard.set(data, forKey: "favRecipesId")
 
         } catch {
@@ -83,10 +97,8 @@ class RecipeDetailViewModel: ObservableObject {
         
         if let data = UserDefaults.standard.data(forKey: "favRecipesId") {
             do {
-                // Create JSON Decoder
                 let decoder = JSONDecoder()
 
-                // Decode Note
                 favRecipesId = try decoder.decode([Int].self, from: data)
             } catch {
                 print("Unable to Decode Notes (\(error))")
@@ -102,13 +114,10 @@ class RecipeDetailViewModel: ObservableObject {
         print(favRecipesId)
 
         do {
-            // Create JSON Encoder
             let encoder = JSONEncoder()
 
-            // Encode Note
             let data = try encoder.encode(favRecipesId)
 
-            // Write/Set Data
             UserDefaults.standard.set(data, forKey: "favRecipesId")
 
         } catch {

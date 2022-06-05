@@ -18,9 +18,6 @@ struct ExploreMenuCard: View {
                     .scaledToFill()
             } placeholder: {
                 ProgressView()
-//                Image("turtlerock")
-//                    .resizable()
-//                    .scaledToFill()
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 200)
             .cornerRadius(20)

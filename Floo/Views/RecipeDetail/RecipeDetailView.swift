@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     @StateObject var viewModel = RecipeDetailViewModel()
-    @State private var isFavorite: Bool = false
     var id: Int
     
     var body: some View {
@@ -25,10 +24,6 @@ struct RecipeDetailView: View {
                             .ignoresSafeArea()
                     } placeholder: {
                         ProgressView()
-    //                    Image("turtlerock")
-    //                        .resizable()
-    //                        .aspectRatio(3 / 2, contentMode: .fit)
-    //                        .ignoresSafeArea()
                     }
                     
                     VStack(alignment: .leading, spacing: 10) {
@@ -37,8 +32,8 @@ struct RecipeDetailView: View {
                                 .font(.title2)
                                 .bold()
                             
-                            FavoriteButton(isSet: $isFavorite)
-                                .onChange(of: isFavorite) {bool in
+                            FavoriteButton(isSet: $viewModel.isFav)
+                                .onChange(of: viewModel.isFav) {bool in
                                     if bool {
                                         viewModel.setFavorite(id: viewModel.results.id!)
                                     } else {
@@ -166,11 +161,12 @@ struct RecipeDetailView: View {
         }.onAppear {
             viewModel.loadData(id: self.id)
             print(self.id)
-        }
+        }.navigationBarTitle("", displayMode: .inline)
     }
 }
 
 struct RecipeDetailViewMyRecipe: View {
+    @Environment(\.presentationMode) var presentation
     var recipe: RecipeDetail
     
     var body: some View {
@@ -187,14 +183,14 @@ struct RecipeDetailViewMyRecipe: View {
                             .font(.title2)
                             .bold()
                         
-//                        FavoriteButton(isSet: $isFavorite)
-//                            .onChange(of: isFavorite) {bool in
-//                                if bool {
-//                                    viewModel.setFavorite(id: viewModel.results.id!)
-//                                } else {
-//                                    viewModel.removeFavorite(id: viewModel.results.id!)
-//                                }
-//                            }
+                        Button {
+                            deleteSavedRecipe(id: recipe.id!)
+                            presentation.wrappedValue.dismiss()
+                        } label: {
+                            Label("Toggle Favorite", systemImage: "trash.fill")
+                                .labelStyle(.iconOnly)
+                                .foregroundColor(.gray)
+                        }
                     }
                     
                     Text(recipe.summary ?? "Description")
@@ -312,6 +308,36 @@ struct RecipeDetailViewMyRecipe: View {
                 
                 Spacer()
             }
+        }.navigationBarTitle("Title", displayMode: .inline)
+    }
+    
+    func deleteSavedRecipe(id: Int) {
+        var recipes = [RecipeDetail]()
+        
+        if let data = UserDefaults.standard.data(forKey: "recipes") {
+            do {
+                let decoder = JSONDecoder()
+
+                recipes = try decoder.decode([RecipeDetail].self, from: data)
+            } catch {
+                print("Unable to Decode Notes (\(error))")
+            }
+        }
+        
+        for (index, recipe) in recipes.enumerated() {
+            if (recipe.id == id) {
+                recipes.remove(at: index)
+            }
+        }
+        
+        do {
+            let encoder = JSONEncoder()
+            
+            let data = try encoder.encode(recipes)
+            
+            UserDefaults.standard.set(data, forKey: "recipes")
+        } catch {
+            print("Unable to Encode Array of Recipes (\(error))")
         }
     }
 }
