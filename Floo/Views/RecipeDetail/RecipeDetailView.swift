@@ -139,7 +139,12 @@ struct RecipeDetailView: View {
                         
                         VStack(alignment: .leading,  spacing: 10) {
                             ForEach(Array((viewModel.results.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
-                                Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
+                                HStack {
+                                    Text("\(i + 1). \(ingredient.name ?? "Ingredient") -")
+                                    Text(String(ingredient.amount ?? 1))
+                                    Text(ingredient.unit ?? "")
+                                    Spacer()
+                                }
                             }
                         }
                         
@@ -290,7 +295,11 @@ struct RecipeDetailViewMyRecipe: View {
                     
                     VStack(alignment: .leading, spacing: 8) {
                         ForEach(Array((recipe.extendedIngredients ?? [ExtendedIngredient]()).enumerated()), id: \.offset) { i, ingredient in
-                            Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
+                            HStack {
+                                Text("\(i + 1). \(ingredient.name ?? "Ingredient")")
+                                Text(String(ingredient.amount ?? 1))
+                                Text(ingredient.unit ?? "")
+                            }
                         }
                     }
                     
