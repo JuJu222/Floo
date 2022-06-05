@@ -10,7 +10,7 @@ Justin Jap - 0706012010042
 - Search Recipe
 - See Recipe Detail
 - Add/Remove Recipe as Favorite (Saved to UserDefaults)
-- Add/Save Your Own Recipe (Saved to UserDefaults)
+- Add/Remove Your Own Recipe (Saved to UserDefaults)
 - Edit Profile (Saved to UserDefaults)
 
 ## Demo Video
