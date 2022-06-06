@@ -19,4 +19,4 @@ Floo is a recipe app for iOS that is built in SwiftUI based on the Spoonacular R
 
 ## Demo Video
 
-https://drive.google.com/file/d/1bE9k3J4vGPM8XiKuffmj-DmQf1q2SDG4/view?usp=sharing
+https://drive.google.com/file/d/1UpxlZzopzDyKfdKU8X_22AIg4dRnRZVg/view?usp=sharing
