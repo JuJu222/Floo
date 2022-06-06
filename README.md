@@ -17,6 +17,8 @@ Floo is a recipe app for iOS that is built in SwiftUI based on the Spoonacular R
 - Add/Remove Your Own Recipe (Saved to UserDefaults)
 - Edit Profile (Saved to UserDefaults)
 
+###### *There is a daily limit for the API due to the free plan.
+
 ## Demo Video
 
 https://drive.google.com/file/d/1UpxlZzopzDyKfdKU8X_22AIg4dRnRZVg/view?usp=sharing
